@@ -7,7 +7,7 @@ phases:
       #- $(aws ecr get-login --region ap-south-1 --no-include-email)
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 362520992479.dkr.ecr.us-east-1.amazonaws.com
       - # Replace with this to your repository URI
-      - REPOSITORY_URI=362520992479.dkr.ecr.us-east-1.amazonaws.com/diatoz_project
+      - REPOSITORY_URI=362520992479.dkr.ecr.us-east-1.amazonaws.com/diatoz_reg
       - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
   build:
     commands:
@@ -17,13 +17,13 @@ phases:
       - echo Building the Docker image...
       - ls
       - docker --version
-      - docker build -t diatoz_project .
-      - docker tag diatoz_project:latest 362520992479.dkr.ecr.us-east-1.amazonaws.com/diatoz_project:latest
+      - docker build -t diatoz_reg .
+      - docker tag diatoz_reg:latest 362520992479.dkr.ecr.us-east-1.amazonaws.com/diatoz_reg:latest
   post_build:
     commands:
       - echo Build completed on `date`
       - echo pushing to repo
-      - docker push 362520992479.dkr.ecr.us-east-1.amazonaws.com/diatoz_project:latest
+      - docker push 362520992479.dkr.ecr.us-east-1.amazonaws.com/diatoz_reg:latest
       #- docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image definitions file...
       # Give your container name
