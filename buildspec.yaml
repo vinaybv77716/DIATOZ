@@ -4,16 +4,11 @@ phases:
     commands:
       - echo Logging in to Amazon ECR....
       - aws --version
-      #- $(aws ecr get-login --region ap-south-1 --no-include-email)
       - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 362520992479.dkr.ecr.us-east-1.amazonaws.com
-      - # Replace with this to your repository URI
       - REPOSITORY_URI=362520992479.dkr.ecr.us-east-1.amazonaws.com/diatoz_reg
-      - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
   build:
     commands:
       - echo Build started on `date`
-      #- echo building the Jar file
-      #- mvn clean install
       - echo Building the Docker image...
       - ls
       - docker --version
@@ -24,14 +19,9 @@ phases:
       - echo Build completed on `date`
       - echo pushing to repo
       - docker push 362520992479.dkr.ecr.us-east-1.amazonaws.com/diatoz_reg:latest
-      #- docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image definitions file...
-      # Give your container name
       - DOCKER_CONTAINER_NAME=kool_container
-      - printf '[{"name":"%s","imageUri":"%s"}]' $DOCKER_CONTAINER_NAME $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
-      - echo $DOCKER_CONTAINER_NAME
-      - echo printing imagedefinitions.json
-      - cat imagedefinitions.json
+
 artifacts:
   files:
     - imagedefinitions.json
