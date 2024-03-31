@@ -15,7 +15,7 @@ pipeline {
         stage("Push to DockerHub"){
             steps{
                
-                    sh "docker login -u bvvinay -p Bv@22188"
+                    sh "docker login -u bvvinay --password Bv@22188"
                     sh "docker push bvvinay/diatoz" 
                 
             }
