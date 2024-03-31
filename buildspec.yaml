@@ -20,7 +20,7 @@ phases:
       - echo pushing to repo
       - docker push 362520992479.dkr.ecr.us-east-1.amazonaws.com/diatoz_reg:latest
       - echo Writing image definitions file...
-      - DOCKER_CONTAINER_NAME=kool_container
+      - DOCKER_CONTAINER_NAME=diatoz_reg
 
 artifacts:
   files:
