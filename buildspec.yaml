@@ -25,3 +25,4 @@ phases:
 artifacts:
   files:
     - '**/*'
+  base-directory: ../simple-flask-app
