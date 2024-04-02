@@ -4,8 +4,8 @@ phases:
     commands:
       - echo Logging in to Amazon ECR....
       - aws --version
-      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 362520992479.dkr.ecr.us-east-1.amazonaws.com
-      - REPOSITORY_URI=362520992479.dkr.ecr.us-east-1.amazonaws.com/diatoz_reg
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 890405391444.dkr.ecr.us-east-1.amazonaws.com
+      - REPOSITORY_URI=890405391444.dkr.ecr.us-east-1.amazonaws.com/diatoz_reg
   build:
     commands:
       - echo Build started on `date`
@@ -13,12 +13,12 @@ phases:
       - ls
       - docker --version
       - docker build -t diatoz_reg .
-      - docker tag diatoz_reg:latest 362520992479.dkr.ecr.us-east-1.amazonaws.com/diatoz_reg:latest
+      - docker tag diatoz_reg:latest 890405391444.dkr.ecr.us-east-1.amazonaws.com/diatoz_reg:latest
   post_build:
     commands:
       - echo Build completed on `date`
       - echo pushing to repo
-      - docker push 362520992479.dkr.ecr.us-east-1.amazonaws.com/diatoz_reg:latest
+      - docker push 890405391444.dkr.ecr.us-east-1.amazonaws.com/diatoz_reg:latest
       - echo Writing image definitions file...
       - DOCKER_CONTAINER_NAME=diatoz_reg
 
