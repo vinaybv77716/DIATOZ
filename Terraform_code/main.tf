@@ -1,6 +1,9 @@
 # Creating VPC
 resource "aws_vpc" "diatoz_vpc" {
   cidr_block = var.cidr
+  tags = {
+    name="diatoz_vpc"
+  }
 }
 
 #Creating public subnet
@@ -9,6 +12,9 @@ resource "aws_subnet" "diatoz_public_subnet" {
   cidr_block = var.public_subnet_cidr
   availability_zone = var.availability_zone
   map_public_ip_on_launch = true
+  tags = {
+    name="diatoz_public_subnet"
+  }
 }
 
 #Creating private subnet
@@ -16,11 +22,17 @@ resource "aws_subnet" "diatoz_private_subnet" {
   vpc_id = aws_vpc.diatoz_vpc.id
   cidr_block = var.private_subnet_cidr
   availability_zone = var.availability_zone
+  tags = {
+    name="diatoz_private_subnet"
+  }
 }
 
 #Creating Internet_gateway
 resource "aws_internet_gateway" "diatoz_internet_gateway" {
   vpc_id = aws_vpc.diatoz_vpc.id
+  tags = {
+    name="diatoz_internet_gateway"
+  }
 }
 
 #Creating NAT Gateway
@@ -39,9 +51,13 @@ resource "aws_route_table" "diatoz_rout_tabel" {
     cidr_block="0.0.0.0/0"
     gateway_id=aws_internet_gateway.diatoz_internet_gateway.id
   }
+ 
   route {
     cidr_block="0.0.0.0/8"
     gateway_id=aws_nat_gateway.diatoz_nat_gateway.id
+  }
+  tags = {
+    name="diatoz_rout_tabel"
   }
 }
 
