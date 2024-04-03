@@ -12,6 +12,7 @@
           "awslogs-region": "${aws_region}",
           "awslogs-stream-prefix": "ecs"
         }
+        
     },
     "portMappings": [
       {
@@ -46,6 +47,23 @@
     {
       "name": "diatoz_backend",
       "image": "mysql:5.7",
+
+
+
+  "cpu": ${fargate_cpu},
+    "memory": ${fargate_memory},
+    "networkMode": "awsvpc",
+    "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+          "awslogs-group": "/ecs/cb-app",
+          "awslogs-region": "${aws_region}",
+          "awslogs-stream-prefix": "ecs"
+        }
+    },
+
+
+
       "portMappings": [
         {
           "containerPort": 3306,

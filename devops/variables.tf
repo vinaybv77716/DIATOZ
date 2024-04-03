@@ -42,4 +42,5 @@ variable "fargate_memory" {
   default     = "2048"
 }
 variable "tag" {
+  default = "latest"
 }
