@@ -2,7 +2,7 @@ resource "aws_ecs_cluster" "main" {
   name = "jms-cluster"
 }
 data "aws_ecr_repository" "nodeapp"{
-name = "nodeproj"
+name = "nodeapp"
 }
 data "template_file" "cb_app" {
   template = file("./templates/ecs/cb_app.json.tpl")
@@ -18,7 +18,7 @@ data "template_file" "cb_app" {
 }
 
 resource "aws_ecs_task_definition" "app" {
-  family                   = "jms-app-task"
+  family                   = "diatoz_task"
   execution_role_arn       = aws_iam_role.ecs_task_execution_role.arn
   network_mode             = "awsvpc"
   requires_compatibilities = ["FARGATE"]
@@ -42,7 +42,7 @@ resource "aws_ecs_service" "main" {
 
   load_balancer {
     target_group_arn = aws_alb_target_group.app.id
-    container_name   = "jms-app"
+    container_name   = "diatoz_container"
     container_port   = var.app_port
   }
 
