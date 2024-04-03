@@ -86,6 +86,12 @@ resource "aws_security_group" "diatoz_security_group" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
+  ingress {
+    from_port   = 5000
+    to_port     = 5000
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
     ingress {
     from_port   = -1
     to_port     = -1
